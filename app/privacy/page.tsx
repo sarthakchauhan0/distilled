@@ -19,8 +19,8 @@ export default function PrivacyPage() {
         <section className="space-y-4">
           <h2 className="text-2xl font-semibold text-white">1. Local-First Processing</h2>
           <p>
-            At Starky Labs, our core methodology relies on <strong>Edge Compute</strong> and <strong>Local-First Processing</strong>. 
-            When you use Distilled, the heavy lifting—including WebAssembly (WASM) execution and analytical logic—happens directly on your device. 
+            At Starky Labs, our core methodology relies on <strong>Edge Compute</strong> and <strong>Local-First Processing</strong>.
+            When you use Distilled, the heavy lifting—including WebAssembly (WASM) execution and analytical logic—happens directly on your device.
             Your proprietary source code and sensitive application data <strong>never travel to a centralized server or headquarters</strong>.
           </p>
         </section>
@@ -28,8 +28,8 @@ export default function PrivacyPage() {
         <section className="space-y-4">
           <h2 className="text-2xl font-semibold text-white">2. Token Optimization Privacy</h2>
           <p>
-            Our core mission is AI efficiency. By optimizing token generation and consumption locally, we ensure that the minimum viable context is sent to any external Large Language Models (LLMs) you configure. 
-            We do not log, review, or store these prompts. 
+            Our core mission is AI efficiency. By optimizing token generation and consumption locally, we ensure that the minimum viable context is sent to any external Large Language Models (LLMs) you configure.
+            We do not log, review, or store these prompts.
           </p>
         </section>
 
@@ -54,7 +54,7 @@ export default function PrivacyPage() {
 
         <section className="space-y-4 pt-12 border-t border-white/10">
           <p className="text-sm">
-            For privacy inquiries, please reach out to <a href="mailto:hello@starkylabs.com" className="text-indigo-400 hover:text-indigo-300">hello@starkylabs.com</a>.
+            For privacy inquiries, please reach out to <a href="mailto:distilled@starkylabs.com" className="text-indigo-400 hover:text-indigo-300">distilled@starkylabs.com</a>.
           </p>
           <p className="text-sm text-zinc-500 mt-4">
             Starky Labs is a Distributed Organization.

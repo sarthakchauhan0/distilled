@@ -35,7 +35,7 @@ const StealthManifesto: React.FC = () => {
           </blockquote>
 
           <p>
-            This is Proprietary Local Intelligence. It is built for the solo hacker
+            This is Distilled Local Intelligence. It is built for the solo hacker
             demanding 10x leverage and for the Enterprise CTO who cannot
             compromise on data residence or bottom-line ROI.
           </p>
