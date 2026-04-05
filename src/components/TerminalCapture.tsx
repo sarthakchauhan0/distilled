@@ -11,9 +11,14 @@ const TerminalCapture: React.FC = () => {
   const [hasSubmitted, setHasSubmitted] = useState(false);
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success'>('idle');
   const [showCursor, setShowCursor] = useState(true);
+  const [mounted, setMounted] = useState(false);
+  const [currentDate, setCurrentDate] = useState('');
 
   // Synthetic blinking cursor logic
   useEffect(() => {
+    setMounted(true);
+    setCurrentDate(new Date().toUTCString());
+    
     const interval = setInterval(() => {
       setShowCursor((prev) => !prev);
     }, 530);
@@ -91,6 +96,12 @@ const TerminalCapture: React.FC = () => {
     }
   };
 
+  if (!mounted) return (
+    <section id="terminal-capture" className="bg-black py-48 px-6 flex items-center justify-center min-h-[80vh] scroll-mt-20">
+      <div className="w-full max-w-2xl h-[400px] bg-[#1e1e1e] rounded-xl border border-white/5 animate-pulse" />
+    </section>
+  );
+
   return (
     <section id="terminal-capture" className="bg-black py-48 px-6 flex items-center justify-center min-h-[80vh] scroll-mt-20">
       <div className="w-full max-w-2xl bg-[#1e1e1e] rounded-xl overflow-hidden border border-white/5 shadow-2xl transform transition-transform hover:scale-[1.01]">
@@ -113,7 +124,7 @@ const TerminalCapture: React.FC = () => {
         <div className="p-8 font-mono text-sm min-h-[280px]">
           <div className="space-y-4">
             <div className="text-zinc-600 text-xs">
-              Last login: <span suppressHydrationWarning>{new Date().toUTCString()}</span> on ttys002
+              Last login: <span>{currentDate}</span> on ttys002
               <br />
               Initializing secure handshaking... DONE
             </div>

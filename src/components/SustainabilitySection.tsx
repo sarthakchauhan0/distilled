@@ -103,6 +103,9 @@ const SustainabilitySection: React.FC = () => {
           <p className="text-zinc-500 font-mono text-[10px] uppercase tracking-widest">
             Liters H₂O Conserved
           </p>
+          <p className="text-zinc-500/60 font-mono text-[10px] uppercase tracking-wider mt-1">
+            (~58,100 US Gallons)
+          </p>
         </div>
 
         {/* Metric 3: Energy */}
@@ -136,16 +139,16 @@ const SustainabilitySection: React.FC = () => {
         `}
       >
         <h3 className="text-emerald-400 text-base uppercase tracking-[0.3em] font-bold mb-6">
-          Behind the Numbers: Our Data Methodology
+          Behind the Numbers: Annual Team Impact
         </h3>
-        <p className="text-sm font-light text-neutral-400 max-w-2xl leading-relaxed mb-12">
-          Every token processed by an AI agent requires high-density compute and active thermal management.
-          Our sustainability metrics are grounded in 2026 data center efficiency benchmarks.
-          Processing 1 Million unoptimized tokens (unoptimized prompt context) requires an estimated 0.5 kWh
-          of electricity, emits 0.25 kg of CO₂, and evaporates 5.0 Liters of freshwater for cooling.
-          By offloading context analysis to our Local Intelligence Engine (avoiding server-side computation)
-          and applying our semantic pruning algorithms, Distilled by Starky Labs typically achieves a 60-90% reduction
-          in token payload, directly preventing these resource losses.
+        <p className="text-sm font-light text-neutral-400 max-w-2xl leading-relaxed mb-12 text-center mx-auto">
+          Calculated for a standard 100-developer engineering force over a 365-day fiscal year. 
+          At an average consumption of 2 Million tokens/day/dev, a typical enterprise generates ~73 Billion background 
+          tokens annually. By applying our local-first semantic pruning and context distillation 
+          (averaging 60% efficiency gains), Distilled prevents 44 Billion tokens from traveling to the cloud. 
+          This direct reduction in high-density compute prevents an estimated 0.5 kWh, 0.25 kg of CO₂, and 
+          5.0 Liters of cooling H₂O per Million unoptimized tokens—reclaiming critical resources for 
+          the next generation.
         </p>
 
         {/* Next Sections Navigation */}
@@ -169,9 +172,9 @@ const SustainabilitySection: React.FC = () => {
 
       <style dangerouslySetInnerHTML={{
         __html: `
-        .animate-num-co2 { --num-co2: 10240; }
-        .animate-num-h2o { --num-h2o: 25800; }
-        .animate-num-kwh { --num-kwh: 15450; }
+        .animate-num-co2 { --num-co2: 11000; }
+        .animate-num-h2o { --num-h2o: 220000; }
+        .animate-num-kwh { --num-kwh: 22000; }
       `}} />
     </section>
   );

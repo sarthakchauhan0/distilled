@@ -22,9 +22,9 @@ const RoiDisplay: React.FC = () => {
   return (
     <section id="features" className="py-24 px-6 bg-zinc-950 border-y border-white/5 scroll-mt-20">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-        
+
         {/* Left Column: The ROI Story */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, x: -30 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
@@ -36,29 +36,29 @@ const RoiDisplay: React.FC = () => {
               Financial Efficiency
             </span>
           </div>
-          
+
           <h2 className="text-white text-4xl md:text-5xl font-bold leading-tight">
             The high cost of <br />
             <span className="text-gray-500">redundant intelligence.</span>
           </h2>
-          
+
           <p className="text-gray-300 text-lg md:text-xl leading-relaxed max-w-lg">
-            Every redundant token you send is a fraction of a cent wasted. 
-            Scaled across an enterprise, it bleeds thousands of dollars. 
-            Distilled acts as an invisible barrier, optimizing every context window 
+            Every redundant token you send is a fraction of a cent wasted.
+            Scaled across an enterprise, it bleeds thousands of dollars.
+            Distilled acts as an invisible barrier, optimizing every context window
             locally before it ever hits your API provider.
           </p>
 
           <div className="pt-4 border-l-2 border-brand-cyan/30 pl-6">
             <p className="text-white/60 font-mono text-sm italic">
-              "We aren't just saving compute; we're reclaiming the margin 
+              "We aren't just saving compute; we're reclaiming the margin
               lost to inefficient inference architectures."
             </p>
           </div>
         </motion.div>
 
         {/* Right Column: Interactive Calculator */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
@@ -76,7 +76,7 @@ const RoiDisplay: React.FC = () => {
                   ${dailySpend}
                 </span>
               </div>
-              <input 
+              <input
                 type="range"
                 min="10"
                 max="10000"
@@ -95,13 +95,13 @@ const RoiDisplay: React.FC = () => {
             <div className="space-y-4">
               <div className="flex justify-between items-end">
                 <label className="text-gray-400 font-mono text-xs uppercase tracking-widest">
-                  Active AI Developers
+                  Authorized Users
                 </label>
                 <span className="text-white font-mono text-xl">
                   {teamSize}
                 </span>
               </div>
-              <input 
+              <input
                 type="range"
                 min="1"
                 max="500"
@@ -121,7 +121,7 @@ const RoiDisplay: React.FC = () => {
                 Projected Monthly Savings
               </label>
               <div className="text-center">
-                <motion.div 
+                <motion.div
                   key={monthlySavings}
                   initial={{ opacity: 0.5, scale: 0.98 }}
                   animate={{ opacity: 1, scale: 1 }}

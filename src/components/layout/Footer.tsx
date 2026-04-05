@@ -42,7 +42,15 @@ const Footer: React.FC = () => {
             The Labs
           </h4>
           <div className="flex flex-col gap-4 font-mono text-sm text-gray-400 font-bold">
-            <a href="https://starkylabs.com" target="_blank" rel="noopener noreferrer" className="hover:text-[#CCFF00] transition-colors underline decoration-white/10 underline-offset-4">Starky Labs</a>
+            <a href="https://starkylabs.com" target="_blank" rel="noopener noreferrer" className="hover:text-[#CCFF00] transition-colors underline decoration-white/10 underline-offset-4 tracking-tight">Starky Labs</a>
+            <a href="https://x.com/starkylabs" target="_blank" rel="noopener noreferrer" className="hover:text-[#CCFF00] transition-colors flex items-center gap-2 group">
+              <span>X (Twitter)</span>
+              <span className="text-[10px] opacity-30 italic font-normal group-hover:opacity-100 transition-opacity">@starkylabs</span>
+            </a>
+            <a href="https://instagram.com/starkylabs" target="_blank" rel="noopener noreferrer" className="hover:text-[#CCFF00] transition-colors flex items-center gap-2 group">
+              <span>Instagram</span>
+              <span className="text-[10px] opacity-30 italic font-normal group-hover:opacity-100 transition-opacity">@starkylabs</span>
+            </a>
             <a href="mailto:distilled@starkylabs.com" className="hover:text-[#CCFF00] transition-colors">distilled@starkylabs.com</a>
           </div>
         </div>
