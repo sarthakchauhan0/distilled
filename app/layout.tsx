@@ -34,8 +34,8 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     url: "https://distilled.starkylabs.com",
-    title: "Distilled by Starky Labs | The Edge Native DevTool",
-    description: "Experience the fastest, most efficient building with Distilled by Starky Labs. We deliver token optimization and privacy-first DevTools right at the edge.",
+    title: "Distilled | Compute Less. Create More,",
+    description: "Stop paying the \"redundancy tax.\" Distilled is the stealth intelligence layer that prunes AI context locally, slashing token costs and latency before the prompt ever leaves your machine.",
     siteName: "Distilled by Starky Labs",
   },
 };
