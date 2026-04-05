@@ -104,7 +104,7 @@ const SustainabilitySection: React.FC = () => {
             Liters H₂O Conserved
           </p>
           <p className="text-zinc-500/60 font-mono text-[10px] uppercase tracking-wider mt-1">
-            (~58,100 US Gallons)
+            (~58,100 Gallons)
           </p>
         </div>
 
@@ -142,12 +142,12 @@ const SustainabilitySection: React.FC = () => {
           Behind the Numbers: Annual Team Impact
         </h3>
         <p className="text-sm font-light text-neutral-400 max-w-2xl leading-relaxed mb-12 text-center mx-auto">
-          Calculated for a standard 100-developer engineering force over a 365-day fiscal year. 
-          At an average consumption of 2 Million tokens/day/dev, a typical enterprise generates ~73 Billion background 
-          tokens annually. By applying our local-first semantic pruning and context distillation 
-          (averaging 60% efficiency gains), Distilled prevents 44 Billion tokens from traveling to the cloud. 
-          This direct reduction in high-density compute prevents an estimated 0.5 kWh, 0.25 kg of CO₂, and 
-          5.0 Liters of cooling H₂O per Million unoptimized tokens—reclaiming critical resources for 
+          Calculated for a standard 100-developer engineering force over a 365-day fiscal year.
+          At an average consumption of 2 Million tokens/day/dev, a typical enterprise generates ~73 Billion background
+          tokens annually. By applying our local-first semantic pruning and context distillation
+          (averaging 60% efficiency gains), Distilled prevents 44 Billion tokens from traveling to the cloud.
+          This direct reduction in high-density compute prevents an estimated 0.5 kWh, 0.25 kg of CO₂, and
+          5.0 Liters of cooling H₂O per Million unoptimized tokens—reclaiming critical resources for
           the next generation.
         </p>
 
