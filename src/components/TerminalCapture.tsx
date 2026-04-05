@@ -20,10 +20,31 @@ const TerminalCapture: React.FC = () => {
 
     setStatus('submitting');
     
-    // Simulated encryption and dispatch delay
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-    
-    setStatus('success');
+    try {
+      const response = await fetch("/api/waitlist", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email,
+          name: "Terminal User", // Placeholder for terminal-based entry
+          companySize: "Undisclosed", // Placeholder for terminal-based entry
+          timestamp: new Date().toISOString(),
+        }),
+      });
+
+      if (response.ok) {
+        setStatus('success');
+      } else {
+        const errorData = await response.json();
+        console.error("API error:", errorData.error);
+        setStatus('idle');
+        alert("Waitlist error: " + (errorData.error || "Unknown error"));
+      }
+    } catch (error) {
+      console.error("Submission error:", error);
+      setStatus('idle');
+      alert("Something went wrong. Please try again.");
+    }
   };
 
   return (

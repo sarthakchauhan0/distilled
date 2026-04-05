@@ -1,9 +1,13 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+const resend = new Resend(process.env.RESEND_API_KEY || "no_key_set");
 
 export async function POST(req: Request) {
+  if (!process.env.RESEND_API_KEY) {
+    console.error("CRITICAL: RESEND_API_KEY is missing from environment variables.");
+    return NextResponse.json({ error: "Email service is not configured. Please set RESEND_API_KEY." }, { status: 500 });
+  }
   try {
     const { name, email, companySize, timestamp } = await req.json();
 
