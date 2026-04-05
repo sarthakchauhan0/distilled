@@ -36,21 +36,6 @@ const Hero: React.FC = () => {
               ease: "linear" 
             }}
           />
-          <motion.circle
-            cx="50"
-            cy="50"
-            r="1"
-            fill="#00ffcc"
-            animate={{
-              scale: [1, 20, 1],
-              opacity: [0, 0.3, 0],
-            }}
-            transition={{
-              duration: 8,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-          />
           {/* Scanning Line */}
           <motion.line
             x1="0"

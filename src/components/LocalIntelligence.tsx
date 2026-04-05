@@ -15,7 +15,7 @@ const features: Feature[] = [
   {
     id: 1,
     title: 'Zero-Data-Leakage',
-    description: 'Our proprietary local intelligence layer processes every prompt entirely on your machine. No proxy servers, no intermediate cloud logging, and zero exposure of your internal intellectual property.',
+    description: 'Our custom local intelligence layer processes every prompt entirely on your machine. No proxy servers, no intermediate cloud logging, and zero exposure of your internal intellectual property.',
     icon: <ShieldCheck className="w-6 h-6 text-brand-cyan" />,
     span: 'md:col-span-2 md:row-span-1',
   },
@@ -46,14 +46,14 @@ const LocalIntelligence: React.FC = () => {
   return (
     <section id="features" className="py-24 px-6 bg-black">
       <div className="max-w-7xl mx-auto space-y-16">
-        
+
         {/* Header */}
         <div className="text-center space-y-4">
           <h2 className="text-white text-3xl md:text-4xl font-bold">
             Built for <span className="text-gray-500">Total Sovereignty.</span>
           </h2>
           <p className="text-gray-400 max-w-2xl mx-auto text-lg leading-relaxed">
-            Proprietary Local Intelligence enables world-class AI efficiency 
+            Distilled Local Intelligence enables world-class AI efficiency
             without the risk of modern data pipelines.
           </p>
         </div>
@@ -78,7 +78,7 @@ const LocalIntelligence: React.FC = () => {
                 <div className="w-12 h-12 bg-black flex items-center justify-center rounded-xl border border-white/5 group-hover:border-brand-cyan/20 transition-all duration-500">
                   {feature.icon}
                 </div>
-                
+
                 <header className="space-y-3">
                   <h3 className="font-mono tracking-widest text-xs uppercase text-brand-cyan/80">
                     {feature.title}
