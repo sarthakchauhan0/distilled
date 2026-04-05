@@ -44,7 +44,7 @@ const UniversalIntelligence: React.FC = () => {
                 </p>
 
                 <p className="text-gray-200 text-xl md:text-2xl font-medium leading-relaxed italic border-l-2 border-[#CCFF00]/20 pl-8 py-2">
-                  "Starky Distilled is built for the entire spectrum of builders. 
+                  "Distilled by Starky Labs is built for the entire spectrum of builders. 
                   We provide the high-fidelity context you need to create, 
                   and the cost-control you need to lead."
                 </p>

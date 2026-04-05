@@ -49,12 +49,14 @@ export function WaitlistForm() {
         }),
       });
 
-      if (!response.ok) {
-        throw new Error("Failed to submit waitlist request. Please try again.");
+      if (response.status === 200) {
+        setIsSuccess(true);
+      } else {
+        const errorData = await response.json();
+        throw new Error(errorData.error || "Failed to submit waitlist request. Please try again.");
       }
-
-      setIsSuccess(true);
     } catch (err: any) {
+      console.error("Submission error:", err);
       setErrorMsg(err.message || "An unexpected error occurred.");
     } finally {
       setIsSubmitting(false);
@@ -77,7 +79,6 @@ export function WaitlistForm() {
 
   return (
     <div className="bg-zinc-900/50 backdrop-blur-md rounded-2xl border border-zinc-800 p-8 shadow-2xl max-w-lg w-full shrink-0 relative overflow-hidden">
-      {/* Decorative gradient orb */}
       <div className="absolute top-0 right-0 -mr-16 -mt-16 w-32 h-32 bg-indigo-500/10 rounded-full blur-2xl pointer-events-none"></div>
       
       <div className="mb-8">
@@ -86,7 +87,6 @@ export function WaitlistForm() {
       </div>
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-5 relative">
-        {/* Name Field */}
         <div>
           <label htmlFor="name" className="block text-sm font-medium text-zinc-300 mb-1.5">
             Full Name
@@ -103,7 +103,6 @@ export function WaitlistForm() {
           )}
         </div>
 
-        {/* Email Field */}
         <div>
           <label htmlFor="email" className="block text-sm font-medium text-zinc-300 mb-1.5">
             Work Email
@@ -120,7 +119,6 @@ export function WaitlistForm() {
           )}
         </div>
 
-        {/* Company Size Field */}
         <div>
           <label htmlFor="companySize" className="block text-sm font-medium text-zinc-300 mb-1.5">
             Company Size
@@ -142,7 +140,6 @@ export function WaitlistForm() {
           )}
         </div>
 
-        {/* Consent Checkbox */}
         <div className="flex items-start pt-2">
           <div className="flex h-5 items-center">
             <input

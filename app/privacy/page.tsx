@@ -54,7 +54,7 @@ export default function PrivacyPage() {
 
         <section className="space-y-4 pt-12 border-t border-white/10">
           <p className="text-sm">
-            For privacy inquiries, please reach out to <a href="mailto:support@starkylabs.com" className="text-indigo-400 hover:text-indigo-300">support@starkylabs.com</a>.
+            For privacy inquiries, please reach out to <a href="mailto:hello@starkylabs.com" className="text-indigo-400 hover:text-indigo-300">hello@starkylabs.com</a>.
           </p>
           <p className="text-sm text-zinc-500 mt-4">
             Starky Labs is a Distributed Organization.
