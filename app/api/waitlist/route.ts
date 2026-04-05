@@ -9,7 +9,7 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "Email service is not configured. Please set RESEND_API_KEY." }, { status: 500 });
   }
   try {
-    const { name, email, companySize, timestamp } = await req.json();
+    const { name, email, companySize, teamMemberCount, timestamp } = await req.json();
 
     if (!email) {
       return NextResponse.json({ error: "Email is required" }, { status: 400 });
@@ -26,6 +26,7 @@ export async function POST(req: Request) {
         <p><strong>Name:</strong> ${name || "N/A"}</p>
         <p><strong>Email:</strong> ${email}</p>
         <p><strong>Company Size:</strong> ${companySize || "N/A"}</p>
+        ${teamMemberCount ? `<p><strong>Team Members:</strong> ${teamMemberCount}</p>` : ""}
         <p><strong>Timestamp:</strong> ${timestamp}</p>
       `,
     });
