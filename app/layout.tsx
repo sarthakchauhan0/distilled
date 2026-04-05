@@ -7,8 +7,8 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Distilled by Starky Labs | The Edge Native DevTool",
-  description: "Experience the fastest, most efficient building with Distilled by Starky Labs. We deliver token optimization and privacy-first DevTools right at the edge.",
+  title: "Distilled | Compute Less. Create More,",
+  description: "Stop paying the \"redundancy tax.\" Distilled is the stealth intelligence layer that prunes AI context locally, slashing token costs and latency before the prompt ever leaves your machine.",
   keywords: [
     "AI Efficiency",
     "Token Optimization",
