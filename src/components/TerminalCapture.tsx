@@ -1,3 +1,4 @@
+"use client";
 import React, { useState, useEffect } from 'react';
 
 const TerminalCapture: React.FC = () => {
@@ -47,7 +48,7 @@ const TerminalCapture: React.FC = () => {
         <div className="p-8 font-mono text-sm min-h-[280px]">
           <div className="space-y-4">
             <div className="text-zinc-600 text-xs">
-              Last login: {new Date().toUTCString()} on ttys002
+              Last login: <span suppressHydrationWarning>{new Date().toUTCString()}</span> on ttys002
               <br />
               Initializing secure handshaking... DONE
             </div>
