@@ -7,7 +7,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Distilled | Compute Less. Create More,",
+  title: "Distilled | Compute Less. Create More.",
   description: "Stop paying the \"redundancy tax.\" Distilled is the stealth intelligence layer that prunes AI context locally, slashing token costs and latency before the prompt ever leaves your machine.",
   keywords: [
     "AI Efficiency",
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     url: "https://distilled.starkylabs.com",
-    title: "Distilled | Compute Less. Create More,",
+    title: "Distilled | Compute Less. Create More.",
     description: "Stop paying the \"redundancy tax.\" Distilled is the stealth intelligence layer that prunes AI context locally, slashing token costs and latency before the prompt ever leaves your machine.",
     siteName: "Distilled by Starky Labs",
   },
