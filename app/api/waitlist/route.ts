@@ -12,13 +12,14 @@ export async function POST(req: Request) {
     const { name, email, companySize, timestamp } = await req.json();
 
     if (!email) {
-       return NextResponse.json({ error: "Email is required" }, { status: 400 });
+      return NextResponse.json({ error: "Email is required" }, { status: 400 });
     }
 
     // 1. Internal Notification (to the team)
     const { error: internalError } = await resend.emails.send({
-      from: "Distilled by Starky Labs <distilled@starkylabs.com>",
+      from: "Waitlist Internal <notifications@distilled.starkylabs.com>",
       to: "distilled@starkylabs.com",
+      replyTo: "distilled@starkylabs.com",
       subject: `[New Lead] ${name || "Someone"} for Distilled by Starky Labs`,
       html: `
         <h2>New Waitlist Registration</h2>
@@ -36,8 +37,9 @@ export async function POST(req: Request) {
 
     // 2. User Auto-Responder (to the signee)
     const { error: userError } = await resend.emails.send({
-      from: "Distilled by Starky Labs <distilled@starkylabs.com>",
+      from: "Distilled by Starky Labs <hello@distilled.starkylabs.com>",
       to: email,
+      replyTo: "distilled@starkylabs.com",
       subject: "You're on the list | Distilled by Starky Labs",
       html: `
         <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; color: #111;">
@@ -53,7 +55,7 @@ export async function POST(req: Request) {
     });
 
     if (userError) {
-       console.error("Resend responder error:", userError.message);
+      console.error("Resend responder error:", userError.message);
     }
 
     return NextResponse.json({ message: "Success" }, { status: 200 });

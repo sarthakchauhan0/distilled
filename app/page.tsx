@@ -8,7 +8,6 @@ import SustainabilitySection from '../src/components/SustainabilitySection';
 import UniversalIntelligence from '../src/components/UniversalIntelligence';
 import StealthManifesto from '../src/components/StealthManifesto';
 import TerminalCapture from '../src/components/TerminalCapture';
-import { WaitlistForm } from '../src/components/WaitlistForm';
 
 export default function Home() {
   return (
@@ -23,11 +22,6 @@ export default function Home() {
         <UniversalIntelligence />
         <StealthManifesto />
         <TerminalCapture />
-        
-        {/* Full Waitlist Form Section */}
-        <section className="bg-black py-24 px-6 flex flex-col items-center border-t border-zinc-900">
-           <WaitlistForm />
-        </section>
       </main>
 
       <Footer />
