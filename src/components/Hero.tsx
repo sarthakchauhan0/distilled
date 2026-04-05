@@ -39,11 +39,10 @@ const Hero: React.FC = () => {
           {/* Scanning Line */}
           <motion.line
             x1="0"
-            y1="0"
             x2="100"
-            y2="0"
             stroke="#00ffcc"
             strokeWidth="0.05"
+            initial={{ y1: 0, y2: 0 }}
             animate={{
               y1: [0, 100, 0],
               y2: [0, 100, 0],
