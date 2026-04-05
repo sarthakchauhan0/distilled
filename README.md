@@ -1,73 +1,46 @@
-# React + TypeScript + Vite
+# Distilled by Starky Labs
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Distilled is an edge-native, privacy-first DevTool emphasizing AI efficiency and token optimization. This architecture is designed for a globally distributed, next-generation compute environment securely running the heaviest of logic out on the edge.
 
-Currently, two official plugins are available:
+## Architecture & Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **Framework**: Next.js App Router (Migrated from Vite)
+- **Styling**: Tailwind CSS
+- **Animations**: `motion` (Optimized, lightweight implementation representing standard hardware-accelerated animations)
+- **Forms & Validation**: `react-hook-form` & `zod`
+- **Email Pipeline**: Integrated Resend API for auto-responders and admin notifications
 
-## React Compiler
+## Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+1. **Global-First Waitlist**: Fully compliant, timezone-agnostic architecture optimized to capture waitlist information without centralized geographic metadata dependencies.
+2. **Local Intelligence Processing**: The architecture emphasizes running compute entirely through WASM or isolated clients meaning source code never hits centralized API headquarters indiscriminately.
+3. **Optimized SEO Pipeline**: Schema and Layout architecture engineered securely as a universal `SoftwareApplication`, without region-locking.
 
-## Expanding the ESLint configuration
+## Getting Started
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+1. **Install Dependencies**
+   ```bash
+   npm install
+   ```
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+2. **Environment Variables**
+   Create a `.env.local` file to securely maintain your environment context.
+   ```bash
+   RESEND_API_KEY=your_resend_api_key_here
+   ```
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+3. **Run the Development Server**
+   ```bash
+   npm run dev
+   ```
+   Navigate to [http://localhost:3000](http://localhost:3000) to view the application locally.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## Deployment
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+This platform is purpose-built to deploy natively to Edge/Serverless environments (such as Vercel). Simply link your GitHub directory (`https://github.com/sarthakchauhan0/distilled`) and configure your environment variables to launch Distilled universally.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## License & Privacy
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+Please refer to our [Privacy Methodology](/privacy) for greater context into our Local-First Processing standards.
+
+&copy; Starky Labs | Distributed Globally
