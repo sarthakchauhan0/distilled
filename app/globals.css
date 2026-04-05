@@ -1,0 +1,47 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand-cyan: #00ffcc;
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+}
+
+@property --num-co2 {
+  syntax: '<integer>';
+  initial-value: 0;
+  inherits: false;
+}
+
+@property --num-h2o {
+  syntax: '<integer>';
+  initial-value: 0;
+  inherits: false;
+}
+
+@property --num-kwh {
+  syntax: '<integer>';
+  initial-value: 0;
+  inherits: false;
+}
+
+:root {
+  background-color: #000;
+  color: #fff;
+  font-family: var(--font-sans);
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+}
