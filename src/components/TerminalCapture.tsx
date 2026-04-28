@@ -251,11 +251,17 @@ const TerminalCapture: React.FC = () => {
                   )}
 
                   <div className="flex justify-center opacity-50 scale-75">
-                    <Turnstile
-                      ref={turnstileRef}
-                      siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || ""}
-                      options={{ appearance: "interaction-only", theme: "dark" }}
-                    />
+                    {process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ? (
+                      <Turnstile
+                        ref={turnstileRef}
+                        siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY}
+                        options={{ appearance: "interaction-only", theme: "dark" }}
+                      />
+                    ) : (
+                      <div className="text-[10px] text-amber-500/50">
+                        [!] SECURITY_OFFLINE: Missing Site Key
+                      </div>
+                    )}
                   </div>
 
                   <div className="pt-2">

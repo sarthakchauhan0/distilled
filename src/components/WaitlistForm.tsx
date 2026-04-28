@@ -169,13 +169,19 @@ export function WaitlistForm() {
         </div>
 
         {/* Cloudflare Turnstile */}
-        <div className="flex justify-center">
-          <Turnstile
-            ref={turnstileRef}
-            siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || ""}
-            options={{ appearance: "interaction-only" }} // Show only if needed, or use 'always' for debugging
-          />
-        </div>
+        {process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ? (
+          <div className="flex justify-center">
+            <Turnstile
+              ref={turnstileRef}
+              siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY}
+              options={{ appearance: "interaction-only" }}
+            />
+          </div>
+        ) : (
+          <div className="text-[10px] text-amber-500/50 text-center">
+            Security module offline (Missing Site Key)
+          </div>
+        )}
 
         {errorMsg && (
           <div className="p-3 mt-4 text-sm text-red-400 bg-red-900/20 border border-red-900/50 rounded-lg">
