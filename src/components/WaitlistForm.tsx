@@ -103,6 +103,7 @@ export function WaitlistForm() {
           <input
             id="name"
             type="text"
+            autoComplete="name"
             className="w-full px-4 py-2.5 bg-black/50 border border-zinc-800 rounded-lg focus:ring-1 focus:ring-indigo-500/50 focus:border-indigo-500/50 text-white placeholder-zinc-600 transition-colors sm:text-sm"
             placeholder="Jane Doe"
             {...register("name")}
@@ -119,6 +120,7 @@ export function WaitlistForm() {
           <input
             id="email"
             type="email"
+            autoComplete="email"
             className="w-full px-4 py-2.5 bg-black/50 border border-zinc-800 rounded-lg focus:ring-1 focus:ring-indigo-500/50 focus:border-indigo-500/50 text-white placeholder-zinc-600 transition-colors sm:text-sm"
             placeholder="jane@example.com"
             {...register("email")}
