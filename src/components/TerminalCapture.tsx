@@ -1,3 +1,5 @@
+"use client";
+import React, { useState, useEffect, useRef } from 'react';
 import { Turnstile, type TurnstileInstance } from "@marsidev/react-turnstile";
 import { joinWaitlistAction } from "@@/actions";
 
