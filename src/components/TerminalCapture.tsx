@@ -1,5 +1,5 @@
-"use client";
-import React, { useState, useEffect } from 'react';
+import { Turnstile, type TurnstileInstance } from "@marsidev/react-turnstile";
+import { joinWaitlistAction } from "@@/actions";
 
 const TerminalCapture: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -10,9 +10,11 @@ const TerminalCapture: React.FC = () => {
   const [errors, setErrors] = useState<string[]>([]);
   const [hasSubmitted, setHasSubmitted] = useState(false);
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success'>('idle');
+  const turnstileRef = useRef<TurnstileInstance>(null);
   const [showCursor, setShowCursor] = useState(true);
   const [mounted, setMounted] = useState(false);
   const [currentDate, setCurrentDate] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
 
   // Synthetic blinking cursor logic
   useEffect(() => {
@@ -68,31 +70,34 @@ const TerminalCapture: React.FC = () => {
 
     setStatus('submitting');
     
+    const turnstileToken = turnstileRef.current?.getResponse();
+    if (!turnstileToken) {
+      setErrors(["SECURITY_CHECK_REQUIRED: Please complete the handshake authorization."]);
+      setStatus('idle');
+      return;
+    }
+
     try {
-      const response = await fetch("/api/waitlist", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: name,
-          email,
-          companySize,
-          teamMemberCount: companySize === 'Large' ? teamMemberCount : undefined,
-          timestamp: new Date().toISOString(),
-        }),
+      const result = await joinWaitlistAction({
+        name,
+        email,
+        companySize: companySize === 'Large' ? `Team (${teamMemberCount})` : 'Individual',
+        turnstileToken,
       });
 
-      if (response.ok) {
+      if (result.success) {
         setStatus('success');
+        setSuccessMessage(`Verification email dispatched to ${email}. Check your endpoint for the authorization link.`);
       } else {
-        const errorData = await response.json();
-        console.error("API error:", errorData.error);
         setStatus('idle');
-        setErrors([`REMOTE_ERROR: ${errorData.error || "Uplink failed. Please retry."}`]);
+        setErrors([`REMOTE_REJECTION: ${result.error || "Uplink failed."}`]);
+        turnstileRef.current?.reset();
       }
     } catch (error) {
       console.error("Submission error:", error);
       setStatus('idle');
       setErrors(["UPLINK_FAILURE: Connection to starky-hub was interrupted."]);
+      turnstileRef.current?.reset();
     }
   };
 
@@ -243,10 +248,19 @@ const TerminalCapture: React.FC = () => {
                     </div>
                   )}
 
+                  <div className="flex justify-center opacity-50 scale-75">
+                    <Turnstile
+                      ref={turnstileRef}
+                      siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || ""}
+                      options={{ appearance: "interaction-only", theme: "dark" }}
+                    />
+                  </div>
+
                   <div className="pt-2">
                     <button 
                       type="submit"
-                      className="text-[#CCFF00] border border-[#CCFF00]/30 px-4 py-1 hover:bg-[#CCFF00]/10 transition-colors uppercase text-xs tracking-widest cursor-pointer group flex items-center gap-2"
+                      disabled={status === 'submitting'}
+                      className="text-[#CCFF00] border border-[#CCFF00]/30 px-4 py-1 hover:bg-[#CCFF00]/10 transition-colors uppercase text-xs tracking-widest cursor-pointer group flex items-center gap-2 disabled:opacity-50"
                     >
                       <span>[ Join Stealth Queue ]</span>
                       <span className="opacity-0 group-hover:opacity-100 transition-opacity">→</span>
@@ -286,8 +300,7 @@ const TerminalCapture: React.FC = () => {
                       [OK] Added to stealth deployment queue.
                     </div>
                     <div className="text-zinc-500 text-xs leading-relaxed">
-                      Verification token stored for {email}. You will be notified via our encrypted 
-                      delivery channel when a developer slot becomes available.
+                      {successMessage}
                     </div>
                   </div>
                   <div className="flex items-center gap-2">
