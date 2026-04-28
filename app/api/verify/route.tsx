@@ -35,7 +35,7 @@ export async function GET(req: NextRequest) {
     // break the user's verification experience.
     try {
       await resend.emails.send({
-        from: "Distilled by Starky Labs <hello@distilled.starkylabs.com>",
+        from: "Distilled <hello@distilled.starkylabs.com>",
         to: email,
         subject: "You're on the list | Distilled by Starky Labs",
         react: <WelcomeEmail name={name} />,
