@@ -1,5 +1,3 @@
-import React from "react";
-
 export const metadata = {
   title: "Privacy Policy | Distilled by Starky Labs",
   description: "Our local-first privacy policy explains how data stays securely on your device.",

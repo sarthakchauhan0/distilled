@@ -1,4 +1,3 @@
-import React from 'react';
 import Navbar from '../src/components/layout/Navbar';
 import Footer from '../src/components/layout/Footer';
 import Hero from '../src/components/Hero';

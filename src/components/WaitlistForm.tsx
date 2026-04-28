@@ -1,13 +1,15 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
+import { Turnstile, type TurnstileInstance } from "@marsidev/react-turnstile";
+import { joinWaitlistAction } from "@@/actions";
 
 const formSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters."),
-  email: z.string().email("Please enter a valid work email address."),
+  email: z.string().email("Please enter a valid email address."),
   companySize: z.string().min(1, "Please select your company size."),
   consent: z.boolean().refine((val) => val === true, {
     message: "You must consent to data processing.",
@@ -20,6 +22,7 @@ export function WaitlistForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
+  const turnstileRef = useRef<TurnstileInstance>(null);
 
   const {
     register,
@@ -39,25 +42,31 @@ export function WaitlistForm() {
     setIsSubmitting(true);
     setErrorMsg("");
 
+    const turnstileToken = turnstileRef.current?.getResponse();
+    
+    if (!turnstileToken) {
+      setErrorMsg("Please complete the security check.");
+      setIsSubmitting(false);
+      return;
+    }
+
     try {
-      const response = await fetch("/api/waitlist", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          ...data,
-          timestamp: new Date().toISOString(),
-        }),
+      const result = await joinWaitlistAction({
+        ...data,
+        turnstileToken,
       });
 
-      if (response.status === 200) {
+      if (result.success) {
         setIsSuccess(true);
       } else {
-        const errorData = await response.json();
-        throw new Error(errorData.error || "Failed to submit waitlist request. Please try again.");
+        setErrorMsg(result.error || "Something went wrong.");
+        // Reset turnstile on failure
+        turnstileRef.current?.reset();
       }
     } catch (err: any) {
       console.error("Submission error:", err);
-      setErrorMsg(err.message || "An unexpected error occurred.");
+      setErrorMsg("An unexpected error occurred. Please try again.");
+      turnstileRef.current?.reset();
     } finally {
       setIsSubmitting(false);
     }
@@ -69,9 +78,9 @@ export function WaitlistForm() {
         <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
         </svg>
-        <h3 className="text-xl font-medium text-zinc-100">Welcome to the future</h3>
+        <h3 className="text-xl font-medium text-zinc-100">Verification email sent</h3>
         <p className="text-sm text-zinc-400 max-w-md">
-          You're on the list for the private beta. Keep an eye on your inbox for early access.
+          We've sent a link to your email address. Please click it to confirm your spot on the waitlist.
         </p>
       </div>
     );
@@ -105,13 +114,13 @@ export function WaitlistForm() {
 
         <div>
           <label htmlFor="email" className="block text-sm font-medium text-zinc-300 mb-1.5">
-            Work Email
+            Email Address
           </label>
           <input
             id="email"
             type="email"
             className="w-full px-4 py-2.5 bg-black/50 border border-zinc-800 rounded-lg focus:ring-1 focus:ring-indigo-500/50 focus:border-indigo-500/50 text-white placeholder-zinc-600 transition-colors sm:text-sm"
-            placeholder="jane@company.com"
+            placeholder="jane@example.com"
             {...register("email")}
           />
           {errors.email && (
@@ -157,6 +166,15 @@ export function WaitlistForm() {
               <p className="mt-1 text-xs text-red-500">{errors.consent.message}</p>
             )}
           </div>
+        </div>
+
+        {/* Cloudflare Turnstile */}
+        <div className="flex justify-center">
+          <Turnstile
+            ref={turnstileRef}
+            siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || ""}
+            options={{ appearance: "interaction-only" }} // Show only if needed, or use 'always' for debugging
+          />
         </div>
 
         {errorMsg && (
