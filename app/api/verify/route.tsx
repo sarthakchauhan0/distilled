@@ -1,13 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 import { verifyToken } from "@/lib/token";
-import { verifyWaitlistEntry } from "@/lib/db";
+import { getWaitlistEntry, verifyWaitlistEntry } from "@/lib/db";
 import { Resend } from "resend";
 import { WelcomeEmail } from "@/components/emails/WelcomeEmail";
 
 const resend = new Resend(process.env.RESEND_API_KEY || "no-key");
 
-// Switching to 'nodejs' (Serverless) which has a more generous timeout than 'edge'
-// for handling multiple external API calls (Supabase + Resend).
 export const runtime = "nodejs";
 
 export async function GET(req: NextRequest) {
@@ -25,14 +23,19 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ error: "Invalid or expired token" }, { status: 400 });
     }
 
-    // 1. Update DB status to VERIFIED and get user's name
-    // We await this because we need the name for the email
+    // Check current status
+    const entry = await getWaitlistEntry(email);
+
+    if (entry?.status === "VERIFIED") {
+      // Already verified, just redirect to success page
+      // We add a 'verified=already' param so the success page can show a custom message
+      return NextResponse.redirect(new URL("/verify-success?verified=already", req.url));
+    }
+
+    // If PENDING, update DB status to VERIFIED
     const name = await verifyWaitlistEntry(email);
 
-    // 2. Send Welcome Email
-    // We use await here to ensure it's sent before we finish
-    // but we wrap it in a try-catch so an email failure doesn't 
-    // break the user's verification experience.
+    // Send Welcome Email
     try {
       await resend.emails.send({
         from: "Distilled <hello@distilled.starkylabs.com>",
@@ -42,12 +45,10 @@ export async function GET(req: NextRequest) {
       });
     } catch (emailErr) {
       console.error("Welcome email failed to send:", emailErr);
-      // We don't throw here so the user still gets redirected to success
     }
 
     // Redirect to success page
-    const successUrl = new URL("/verify-success", req.url);
-    return NextResponse.redirect(successUrl);
+    return NextResponse.redirect(new URL("/verify-success", req.url));
   } catch (err) {
     console.error("Verification process error:", err);
     return NextResponse.json({ 
