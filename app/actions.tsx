@@ -85,8 +85,11 @@ export async function joinWaitlistAction(
     }
 
     return { success: true };
-  } catch (err) {
+  } catch (err: any) {
     console.error("Waitlist action error:", err);
-    return { success: false, error: "An unexpected error occurred." };
+    return { 
+      success: false, 
+      error: err instanceof Error ? err.message : "An unexpected error occurred." 
+    };
   }
 }
