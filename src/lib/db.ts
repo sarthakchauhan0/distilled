@@ -44,13 +44,17 @@ export async function verifyWaitlistEntry(email: string) {
     throw new Error("Supabase client is not initialized. Check your environment variables.");
   }
 
-  const { error } = await supabase
+  const { data, error } = await supabase
     .from("waitlist")
     .update({ status: "VERIFIED" })
-    .eq("email", email);
+    .eq("email", email)
+    .select("name")
+    .single();
 
   if (error) {
     console.error("Supabase verify error:", error);
     throw new Error("Failed to verify email.");
   }
+
+  return data?.name || "Member";
 }
