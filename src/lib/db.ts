@@ -3,7 +3,11 @@ import { createClient } from "@supabase/supabase-js";
 const supabaseUrl = process.env.SUPABASE_URL || "";
 const supabaseAnonKey = process.env.SUPABASE_ANON_KEY || "";
 
-export const supabase = createClient(supabaseUrl, supabaseAnonKey);
+// Only initialize if we have the keys, otherwise provide a dummy or handle it in functions
+// This prevents the build from crashing on Vercel
+export const supabase = (supabaseUrl && supabaseAnonKey) 
+  ? createClient(supabaseUrl, supabaseAnonKey)
+  : null;
 
 export interface WaitlistEntry {
   email: string;
@@ -13,6 +17,10 @@ export interface WaitlistEntry {
 }
 
 export async function upsertWaitlistEntry(entry: WaitlistEntry) {
+  if (!supabase) {
+    throw new Error("Supabase client is not initialized. Check your environment variables.");
+  }
+
   const { error } = await supabase
     .from("waitlist")
     .upsert(
@@ -32,6 +40,10 @@ export async function upsertWaitlistEntry(entry: WaitlistEntry) {
 }
 
 export async function verifyWaitlistEntry(email: string) {
+  if (!supabase) {
+    throw new Error("Supabase client is not initialized. Check your environment variables.");
+  }
+
   const { error } = await supabase
     .from("waitlist")
     .update({ status: "VERIFIED" })
