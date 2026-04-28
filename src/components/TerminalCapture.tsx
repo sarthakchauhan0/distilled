@@ -261,8 +261,7 @@ const TerminalCapture: React.FC = () => {
                   <div className="pt-2">
                     <button 
                       type="submit"
-                      disabled={status === 'submitting'}
-                      className="text-[#CCFF00] border border-[#CCFF00]/30 px-4 py-1 hover:bg-[#CCFF00]/10 transition-colors uppercase text-xs tracking-widest cursor-pointer group flex items-center gap-2 disabled:opacity-50"
+                      className="text-[#CCFF00] border border-[#CCFF00]/30 px-4 py-1 hover:bg-[#CCFF00]/10 transition-colors uppercase text-xs tracking-widest cursor-pointer group flex items-center gap-2"
                     >
                       <span>[ Join Stealth Queue ]</span>
                       <span className="opacity-0 group-hover:opacity-100 transition-opacity">→</span>
